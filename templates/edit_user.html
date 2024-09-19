@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+ 
+<head>
+    <title>FlaskTest</title>
+    <!--This is how we link to our CSS file in our static folder-->
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}"> 
+</head>
+<body>
+{% block content %}
+<h2>Edit Users</h2>
+<form method="post">
+    {% for game in game %}
+    <label for="Game_name">Game name</label>
+    <input type="text" name="game_name" id="game_name" value="{{games.title}}" required>
+
+    <label for="platfrom">platform:</label>
+    <input type="text" name="platform" id="platform" value="{{games.platform}}" required>
+
+    <label for="genre">genre:</label>
+    <input type="text" name="genre" id="genre" value="{{games.genre}}" required>
+
+    <label for="year">year:</label>
+    <input type="text" name="year" id="year" value="{{games.year}}" required>
+
+    <label for="sales">sales:</label>
+    <input type="text" name="sales" id="sales" value="{{games.sales}}" required>
+    <button type="submit">Update game</button>
+</form>
+{% endblock %}

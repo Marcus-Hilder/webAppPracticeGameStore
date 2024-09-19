@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+ 
+<head>
+    <title>FlaskTest</title>
+    <!--This is how we link to our CSS file in our static folder-->
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}"> 
+</head>
+ 
+<body>
+
+{% block content %}
+<h2>All Games</h2>
+<table>
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>game Name</th>
+            <th>platform</th>
+            <th>genre</th>
+            <th>year</th>
+            <th>sales</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for game in game %}
+        <tr>
+            <td>{{ game.id }}</td>
+            <td>{{ game.title }}</td>
+            <td>{{ game.platform}}</td>
+            <td>{{ game.genre }}</td>
+            <td>{{ game.year }}</td>
+            <td>{{ game.sales}}</td>
+            <td>
+                <a href="{{ url_for('edit_user', id=game.id) }}">Edit</a>
+                <form action="{{ url_for('delete_user', id=game.id) }}" method="post" style="display:inline;">
+                    <button type="submit">Delete</button>
+                </form>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}
+</body>
+</html>

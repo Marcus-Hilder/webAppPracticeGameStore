@@ -35,12 +35,52 @@ def New_games():
             flash('All fields required')
         else:
             conn = get_db_connection()
-            conn.execute('INSERT INTO games (title,platform,genre,year,sales) VALUES (?,?)',(game_name,platform))
+            conn.execute('INSERT INTO games (title,platform,genre,year,sales) VALUES (?,?,?,?,?)',(game_name,platform,genre,year,sales))
             conn.commit()
             conn.close()
             return redirect(url_for('index'))
     return render_template("login.html")
 
+@app.route('/admin')
+def admin():
+    conn = get_db_connection()
+    sql = "SELECT * FROM games"
+    game = conn.execute(sql).fetchall()
+    conn.close()
+    #print(user)
+    return render_template('view_users.html',game=game)
+
+# Route to edit a game
+@app.route('/edit/<int:id>', methods=('GET', 'POST'))
+def edit_user(id):
+    conn = get_db_connection()
+    users = conn.execute('SELECT * FROM games WHERE id = ?', (id,)).fetchone()
+
+    if request.method == 'POST':
+        user_name = request.form['userName']
+        password = request.form['password']
+
+        if not user_name or not password:
+            flash('All fields are required!')
+        else:
+            conn.execute('UPDATE users SET username = ?, password = ? WHERE id = ?',
+                         (user_name, password,id))
+            conn.commit()
+            conn.close()
+            return redirect(url_for('admin'))
+
+    return render_template('edit_user.html', users=users)
+
+
+# Route to delete a game
+@app.route('/delete/<int:id>', methods=('POST',))
+def delete_user(id):
+    conn = get_db_connection()
+    conn.execute('DELETE FROM users WHERE id = ?', (id,))
+    conn.commit()
+    conn.close()
+    flash('User deleted successfully!')
+    return redirect(url_for('admin'))
 
 if __name__ == '__main__':
     app.run(debug=True, port=7654)
