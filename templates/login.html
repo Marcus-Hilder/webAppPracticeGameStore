@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+ 
+<head>
+    <title>FlaskTest</title>
+    <!--This is how we link to our CSS file in our static folder-->
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}"> 
+</head>
+ 
+<body>
+    <h2 class="homeHeader">New game</h2>
+    <h4 class="homeDetails">Please enter new game info</h4>
+
+{% block content %}
+<!--<img src="{{ url_for('static', filename='OIP (4).jpg') }}" />-->
+<form method="post">
+    <label for="Game_name">Game name</label>
+    <input type="text" name="game_name" id="game_name" required>
+
+    <label for="platfrom">platform:</label>
+    <input type="text" name="platform" id="platform" required>
+
+    <label for="genre">genre:</label>
+    <input type="text" name="genre" id="genre" required>
+
+    <label for="year">year:</label>
+    <input type="text" name="year" id="year" required>
+
+    <label for="sales">sales:</label>
+    <input type="text" name="sales" id="sales" required>
+    
+    <button type="submit">submit</button>
+    
+</form>
+{% endblock %}
+</body>
+</html>
