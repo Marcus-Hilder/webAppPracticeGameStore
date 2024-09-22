@@ -54,22 +54,24 @@ def admin():
 @app.route('/edit/<int:id>', methods=('GET', 'POST'))
 def edit_user(id):
     conn = get_db_connection()
-    users = conn.execute('SELECT * FROM games WHERE id = ?', (id,)).fetchone()
-
+    games = conn.execute('SELECT * FROM games WHERE id = ?', (id,)).fetchone()
+    print(id)
     if request.method == 'POST':
-        user_name = request.form['userName']
-        password = request.form['password']
+         game_name = request.form['game_name']
+         platform = request.form['platform']
+         genre = request.form['genre']
+         year = request.form['year']
+         sales = request.form['sales']
 
-        if not user_name or not password:
+         if not game_name or not platform or not genre or not year or not sales:
             flash('All fields are required!')
-        else:
-            conn.execute('UPDATE users SET username = ?, password = ? WHERE id = ?',
-                         (user_name, password,id))
+         else:
+            conn.execute('UPDATE games SET Title = ?, platform = ?, genre = ?, year = ?, sales = ? WHERE id = ?', (game_name, platform, genre, year, sales, id))
             conn.commit()
             conn.close()
             return redirect(url_for('admin'))
 
-    return render_template('edit_user.html', users=users)
+    return render_template('edit_user.html', games=games)
 
 
 # Route to delete a game
