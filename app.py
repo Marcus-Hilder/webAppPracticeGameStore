@@ -76,7 +76,7 @@ def edit_user(id):
 @app.route('/delete/<int:id>', methods=('POST',))
 def delete_user(id):
     conn = get_db_connection()
-    conn.execute('DELETE FROM users WHERE id = ?', (id,))
+    conn.execute('DELETE FROM games WHERE id = ?', (id,))
     conn.commit()
     conn.close()
     flash('User deleted successfully!')

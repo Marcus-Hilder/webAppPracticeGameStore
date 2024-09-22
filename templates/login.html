@@ -1,6 +1,4 @@
-<!DOCTYPE html>
-<html>
- 
+{% extends 'index.html' %}
 <head>
     <title>FlaskTest</title>
     <!--This is how we link to our CSS file in our static folder-->
@@ -10,7 +8,7 @@
 <body>
     <h2 class="homeHeader">New game</h2>
     <h4 class="homeDetails">Please enter new game info</h4>
-
+    
 {% block content %}
 <!--<img src="{{ url_for('static', filename='OIP (4).jpg') }}" />-->
 <form method="post">
@@ -33,5 +31,3 @@
     
 </form>
 {% endblock %}
-</body>
-</html>
