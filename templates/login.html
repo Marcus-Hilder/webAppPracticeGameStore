@@ -2,7 +2,7 @@
 <head>
     <title>FlaskTest</title>
     <!--This is how we link to our CSS file in our static folder-->
-    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}"> 
+   <!-- <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}"> --> 
 </head>
  
 <body>
@@ -12,22 +12,27 @@
 {% block content %}
 <!--<img src="{{ url_for('static', filename='OIP (4).jpg') }}" />-->
 <form method="post">
-    <label for="Game_name">Game name</label>
+    <label for="game_name">Game name</label>
     <input type="text" name="game_name" id="game_name" required>
 
-    <label for="platfrom">platform:</label>
-    <input type="text" name="platform" id="platform" required>
+    <label for="platform">Platform:</label>
+    <select name="platform" id="platform" required>
+        <option value="steam">Steam</option>
+        <option value="PS5">PS5</option>
+        <option value="xbox">Xbox</option>
+        <option value="switch">Switch</option>
+    </select>
 
-    <label for="genre">genre:</label>
+    <label for="genre">Genre:</label>
     <input type="text" name="genre" id="genre" required>
 
-    <label for="year">year:</label>
+    <label for="year">Year:</label>
     <input type="text" name="year" id="year" required>
 
-    <label for="sales">sales:</label>
+    <label for="sales">Sales:</label>
     <input type="text" name="sales" id="sales" required>
     
-    <button type="submit">submit</button>
-    
+    <button type="submit">Submit</button>
 </form>
+
 {% endblock %}

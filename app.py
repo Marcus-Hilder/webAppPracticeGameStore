@@ -31,7 +31,7 @@ def New_games():
         year = request.form['year']
         sales = request.form['sales']
 
-        if not game_name or not platform:
+        if not game_name or not platform or not genre or not year or not sales:
             flash('All fields required')
         else:
             conn = get_db_connection()
